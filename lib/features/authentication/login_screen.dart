@@ -6,7 +6,7 @@ import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-  void onSignUpTap(BuildContext context) {
+  void _onSignUpTap(BuildContext context) {
     Navigator.pop(context);
   }
 
@@ -51,9 +51,9 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               Column(
-                children: const [
+                children: [
                   Gaps.v80,
-                  Text(
+                  const Text(
                     "Login for TikTok",
                     style: TextStyle(
                       fontSize: Sizes.size24,
@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Gaps.v20,
-                  Text(
+                  const Text(
                     "Create a profile, follow other accounts, make your own videos, and more",
                     style: TextStyle(
                       fontSize: Sizes.size16,
@@ -71,12 +71,15 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Gaps.v48,
                   AuthButton(
-                      icon: FaIcon(FontAwesomeIcons.solidUser),
-                      text: "User email & password"),
+                    icon: const FaIcon(FontAwesomeIcons.solidUser),
+                    text: "User email & password",
+                    onTap: () {},
+                  ),
                   Gaps.v16,
                   AuthButton(
                     text: "Continue with Apple",
-                    icon: FaIcon(FontAwesomeIcons.apple),
+                    icon: const FaIcon(FontAwesomeIcons.apple),
+                    onTap: () {},
                   ),
                 ],
               ),
@@ -99,7 +102,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Gaps.h5,
               GestureDetector(
-                onTap: () => onSignUpTap(context),
+                onTap: () => _onSignUpTap(context),
                 child: Text(
                   "Sign up",
                   style: TextStyle(
