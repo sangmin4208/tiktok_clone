@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/const/gaps.dart';
 import 'package:tiktok_clone/const/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
@@ -56,9 +57,9 @@ class SignUpScreen extends StatelessWidget {
                 ],
               ),
               Column(
-                children: [
+                children: const [
                   Gaps.v80,
-                  const Text(
+                  Text(
                     "Sign up for TikTok",
                     style: TextStyle(
                       fontSize: Sizes.size24,
@@ -66,7 +67,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   Gaps.v20,
-                  const Text(
+                  Text(
                     "Create a profile, follow other accounts, make your own videos, and more",
                     style: TextStyle(
                       fontSize: Sizes.size16,
@@ -75,21 +76,16 @@ class SignUpScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Gaps.v40,
-                  const AuthButton(text: "User Phone or email"),
-                  Gaps.v20,
-                  const AuthButton(text: "Continue with Facebook"),
-                  Gaps.v20,
-                  const AuthButton(text: "Continue with Apple"),
-                  Gaps.v20,
-                  const AuthButton(text: "Continue with Google"),
-                  Row(
-                    children: const [],
+                  AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.solidUser),
+                      text: "User email & password"),
+                  Gaps.v16,
+                  AuthButton(
+                    text: "Continue with Apple",
+                    icon: FaIcon(FontAwesomeIcons.apple),
                   ),
                 ],
               ),
-              const Text(
-                  "By signing up, you agree to our Terms, Data Policy and Cookies Policy."),
-              Container()
             ],
           ),
         ),

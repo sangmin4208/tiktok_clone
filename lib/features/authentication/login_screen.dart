@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/const/gaps.dart';
 import 'package:tiktok_clone/const/sizes.dart';
+import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -49,9 +51,9 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
               Column(
-                children: [
+                children: const [
                   Gaps.v80,
-                  const Text(
+                  Text(
                     "Login for TikTok",
                     style: TextStyle(
                       fontSize: Sizes.size24,
@@ -59,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Gaps.v20,
-                  const Text(
+                  Text(
                     "Create a profile, follow other accounts, make your own videos, and more",
                     style: TextStyle(
                       fontSize: Sizes.size16,
@@ -68,14 +70,16 @@ class LoginScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Gaps.v48,
-                  Row(
-                    children: const [],
+                  AuthButton(
+                      icon: FaIcon(FontAwesomeIcons.solidUser),
+                      text: "User email & password"),
+                  Gaps.v16,
+                  AuthButton(
+                    text: "Continue with Apple",
+                    icon: FaIcon(FontAwesomeIcons.apple),
                   ),
                 ],
               ),
-              const Text(
-                  "By signing up, you agree to our Terms, Data Policy and Cookies Policy."),
-              Container()
             ],
           ),
         ),
