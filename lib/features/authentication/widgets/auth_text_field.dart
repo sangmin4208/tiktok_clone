@@ -10,6 +10,7 @@ class AuthTextField extends StatelessWidget {
     TextInputType? keyboardType,
     String? errorText,
     String? hintText,
+    bool? enabled,
     required TextEditingController? controller,
   })  : _obscureText = obscureText,
         _controller = controller,
@@ -18,7 +19,10 @@ class AuthTextField extends StatelessWidget {
         _keyboardType = keyboardType,
         _errorText = errorText,
         _hintText = hintText,
+        _enabled = enabled ?? true,
         super(key: key);
+
+  final bool _enabled;
 
   final bool _obscureText;
 
@@ -37,6 +41,7 @@ class AuthTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: _enabled,
       obscureText: _obscureText,
       onEditingComplete: _onEditingComplete,
       keyboardType: _keyboardType,
