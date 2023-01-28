@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/const/gaps.dart';
 import 'package:tiktok_clone/const/sizes.dart';
+import 'package:tiktok_clone/features/authentication/email_screen.dart';
+import 'package:tiktok_clone/features/authentication/widgets/widgets.dart';
 
 class UsernameScreen extends StatefulWidget {
   const UsernameScreen({super.key});
@@ -12,17 +14,30 @@ class UsernameScreen extends StatefulWidget {
 class _UsernameScreenState extends State<UsernameScreen> {
   final TextEditingController _usernameController = TextEditingController();
   bool _isTyping = false;
-  bool get _isUsernameValid => _username.isNotEmpty;
   String get _username => _usernameController.text;
+  bool get _isUsernameValid => _username.isNotEmpty && _isTyping;
+
+  void _onNextTap() {
+    if (_isUsernameValid) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const EmailScreen(),
+        ),
+      );
+    } else {
+      setState(() {});
+    }
+  }
+
   @override
   void initState() {
+    super.initState();
     _usernameController.addListener(() {
-      if (_isTyping != true && _username.isNotEmpty) {
+      if (!_isTyping && _username.isNotEmpty) {
         _isTyping = true;
       }
       setState(() {});
     });
-    super.initState();
   }
 
   @override
@@ -89,30 +104,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
               ),
             ),
             Gaps.v32,
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: AnimatedContainer(
-                duration: const Duration(
-                  milliseconds: 300,
-                ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: Sizes.size16,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Sizes.size4),
-                  color: _isUsernameValid
-                      ? Theme.of(context).primaryColor
-                      : Colors.grey.shade300,
-                ),
-                child: const Text(
-                  'Next',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+            FormButton(
+              isValid: _isUsernameValid,
+              onTap: _onNextTap,
             ),
           ],
         ),
