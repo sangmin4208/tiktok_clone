@@ -29,6 +29,10 @@ class SignUpScreen extends StatelessWidget {
     // TODO: implement apple login
   }
 
+  bool _isCanPop(BuildContext context) {
+    return Navigator.of(context).canPop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,17 +46,19 @@ class SignUpScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Transform.translate(
-                    offset: const Offset(-Sizes.size16, 0),
-                    child: IconButton(
-                      visualDensity: VisualDensity.compact,
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        //TODO: close
-                      },
-                      icon: const Icon(Icons.close, color: Colors.grey),
-                    ),
-                  ),
+                  _isCanPop(context)
+                      ? Transform.translate(
+                          offset: const Offset(-Sizes.size16, 0),
+                          child: IconButton(
+                            visualDensity: VisualDensity.compact,
+                            padding: EdgeInsets.zero,
+                            onPressed: () {
+                              //TODO: close
+                            },
+                            icon: const Icon(Icons.close, color: Colors.grey),
+                          ),
+                        )
+                      : const SizedBox(),
                   Transform.translate(
                     offset: const Offset(Sizes.size16, 0),
                     child: IconButton(
