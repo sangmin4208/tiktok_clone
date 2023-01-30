@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone/const/gaps.dart';
 import 'package:tiktok_clone/const/sizes.dart';
+import 'package:tiktok_clone/features/onboarding/tutorial_screen.dart';
 import 'package:tiktok_clone/features/onboarding/widgets/interest_button.dart';
 
 class InterestsScreen extends StatefulWidget {
@@ -80,7 +81,13 @@ class _InterestsScreenState extends State<InterestsScreen> {
   }
 
   _onSkipTap() {}
-  _onNextTap() {}
+  _onNextTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const TutorialScreen(),
+      ),
+    );
+  }
 
   @override
   dispose() {
