@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/const/gaps.dart';
 import 'package:tiktok_clone/const/sizes.dart';
-import 'package:tiktok_clone/features/main_navigation/stf_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktok_clone/features/main_navigation/widgets/post_video_button.dart';
+import 'package:tiktok_clone/features/videos/video_time_line_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -30,26 +30,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     // const Center(
     //   child: Text('Profile'),
     // ),
-    const StfScreen(
-      key: Key('home'),
-      title: 'Home',
-    ),
-    const StfScreen(
-      key: Key('Home'),
-      title: 'Discover',
-    ),
-    const StfScreen(
-      key: Key('Create'),
-      title: 'Create',
-    ),
-    const StfScreen(
-      key: Key('Inbox'),
-      title: 'Inbox',
-    ),
-    const StfScreen(
-      key: Key('Profile'),
-      title: 'Profile',
-    ),
+    const VideoTimelineScreen(),
+    Container(),
+    Container(),
+    Container(),
+    Container(),
   ];
 
   int _selectedIndex = 0;
