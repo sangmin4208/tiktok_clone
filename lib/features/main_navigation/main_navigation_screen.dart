@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/const/sizes.dart';
+import 'package:tiktok_clone/features/main_navigation/stf_screen.dart';
 import 'package:tiktok_clone/features/main_navigation/widgets/nav_tab.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -12,20 +13,40 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final screens = [
-    const Center(
-      child: Text('Home'),
+    // const Center(
+    //   child: Text('Home'),
+    // ),
+    // const Center(
+    //   child: Text('Discover'),
+    // ),
+    // const Center(
+    //   child: Text('Create'),
+    // ),
+    // const Center(
+    //   child: Text('Inbox'),
+    // ),
+    // const Center(
+    //   child: Text('Profile'),
+    // ),
+    const StfScreen(
+      key: Key('home'),
+      title: 'Home',
     ),
-    const Center(
-      child: Text('Search'),
+    const StfScreen(
+      key: Key('Home'),
+      title: 'Discover',
     ),
-    const Center(
-      child: Text('3'),
+    const StfScreen(
+      key: Key('Create'),
+      title: 'Create',
     ),
-    const Center(
-      child: Text('4'),
+    const StfScreen(
+      key: Key('Inbox'),
+      title: 'Inbox',
     ),
-    const Center(
-      child: Text('5'),
+    const StfScreen(
+      key: Key('Profile'),
+      title: 'Profile',
     ),
   ];
 
@@ -57,19 +78,22 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 onTab: () => _onNavTab(0),
               ),
               NavTab(
-                icon: FontAwesomeIcons.magnifyingGlass,
+                icon: FontAwesomeIcons.compass,
+                selectedIcon: FontAwesomeIcons.solidCompass,
                 label: 'Discover',
                 isSelected: _selectedIndex == 1,
                 onTab: () => _onNavTab(1),
               ),
               NavTab(
                 icon: FontAwesomeIcons.message,
+                selectedIcon: FontAwesomeIcons.solidMessage,
                 label: 'Inbox',
                 isSelected: _selectedIndex == 3,
                 onTab: () => _onNavTab(3),
               ),
               NavTab(
                 icon: FontAwesomeIcons.user,
+                selectedIcon: FontAwesomeIcons.solidUser,
                 label: 'Profile',
                 isSelected: _selectedIndex == 4,
                 onTab: () => _onNavTab(4),
