@@ -8,6 +8,8 @@ class VideoTimelineScreen extends StatefulWidget {
 }
 
 class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
+  final PageController _pageController = PageController();
+
   List<Color> colors = [
     Colors.red,
     Colors.green,
@@ -26,16 +28,29 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   }
 
   void _onPageChanged(int index) {
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 150),
+      curve: Curves.linear,
+    );
     if (index == _itemCount - 1) {
-      print('Last page');
-      _itemCount += 4;
-      setState(() {});
+      setState(() {
+        _itemCount += colors.length;
+      });
     }
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('build');
     return PageView.builder(
+      controller: _pageController,
       onPageChanged: _onPageChanged,
       scrollDirection: Axis.vertical,
       itemCount: _itemCount,
