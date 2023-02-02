@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_post.dart';
 
 class VideoTimelineScreen extends StatefulWidget {
   const VideoTimelineScreen({super.key});
@@ -10,32 +11,29 @@ class VideoTimelineScreen extends StatefulWidget {
 class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
   final PageController _pageController = PageController();
 
-  List<Color> colors = [
-    Colors.red,
-    Colors.green,
-    Colors.blue,
-    Colors.yellow,
-    Colors.purple,
-    Colors.orange,
-    Colors.pink,
-    Colors.brown,
-    Colors.cyan,
-    Colors.indigo,
+  Duration get scrollDuration => const Duration(milliseconds: 250);
+  Curve get scrollCurve => Curves.linear;
+
+  List<String> videoAssets = [
+    'assets/videos/test_1.mp4',
+    'assets/videos/test_2.mp4',
+    'assets/videos/test_3.mp4',
   ];
-  int _itemCount = 10;
-  List<Color> get _colors {
-    return List.generate(_itemCount, (index) => colors[index % colors.length]);
+  int _itemCount = 3;
+  List<String> get _videoAssets {
+    return List.generate(
+        _itemCount, (index) => videoAssets[index % videoAssets.length]);
   }
 
   void _onPageChanged(int index) {
     _pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 150),
-      curve: Curves.linear,
+      duration: scrollDuration,
+      curve: scrollCurve,
     );
     if (index == _itemCount - 1) {
       setState(() {
-        _itemCount += colors.length;
+        _itemCount += _videoAssets.length;
       });
     }
   }
@@ -46,26 +44,25 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
     super.dispose();
   }
 
+  void _onVideoFinished() {
+    _pageController.nextPage(
+      duration: scrollDuration,
+      curve: scrollCurve,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    print('build');
     return PageView.builder(
       controller: _pageController,
       onPageChanged: _onPageChanged,
       scrollDirection: Axis.vertical,
       itemCount: _itemCount,
       itemBuilder: (context, index) {
-        return Container(
-          color: _colors[index],
-          child: Center(
-            child: Text(
-              'Page $index',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
+        return VideoPost(
+          key: ValueKey(index),
+          onVideoFinished: _onVideoFinished,
+          videoUrl: _videoAssets[index % _videoAssets.length],
         );
       },
     );
