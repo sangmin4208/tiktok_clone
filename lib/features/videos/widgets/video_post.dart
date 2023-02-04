@@ -18,7 +18,8 @@ class VideoPost extends StatefulWidget {
   State<VideoPost> createState() => _VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
+class _VideoPostState extends State<VideoPost>
+    with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController;
   late final AnimationController _animationController;
 
@@ -33,7 +34,6 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
       upperBound: 1.5,
       value: 1.5,
     );
-    _animationController.addListener(() => setState(() {}));
   }
 
   void _initVideoPlayerController() async {
@@ -58,6 +58,7 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
   @override
   void dispose() {
     _videoPlayerController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -109,8 +110,14 @@ class _VideoPostState extends State<VideoPost> with TickerProviderStateMixin {
           Positioned.fill(
             child: IgnorePointer(
               child: Center(
-                child: Transform.scale(
-                  scale: _animationController.value,
+                child: AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _animationController.value,
+                      child: child,
+                    );
+                  },
                   child: AnimatedOpacity(
                     opacity: _isPaused ? 1 : 0,
                     duration: _animationDuration,
