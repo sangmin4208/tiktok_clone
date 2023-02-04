@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/const/gaps.dart';
 import 'package:tiktok_clone/const/sizes.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_button.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -130,6 +132,53 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "@나쵸",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Gaps.v10,
+                Text(
+                  'This is my house in Thailand!!!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Sizes.size16,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            right: 10,
+            bottom: 10,
+            child: Column(
+              children: const [
+                CircleAvatar(
+                  radius: Sizes.size24,
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  foregroundImage: NetworkImage(
+                      'https://avatars.githubusercontent.com/u/16849874?v=4'),
+                  child: Text('나쵸'),
+                ),
+                Gaps.v32,
+                VideoButton(icon: FontAwesomeIcons.solidHeart, text: '1.2M'),
+                Gaps.v12,
+                VideoButton(icon: FontAwesomeIcons.solidComment, text: '33K'),
+                Gaps.v12,
+                VideoButton(icon: FontAwesomeIcons.share, text: 'Share'),
+              ],
             ),
           ),
         ],
