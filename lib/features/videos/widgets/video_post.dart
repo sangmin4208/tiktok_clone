@@ -39,6 +39,7 @@ class _VideoPostState extends State<VideoPost>
   void _initVideoPlayerController() async {
     _videoPlayerController = VideoPlayerController.asset(widget.videoUrl);
     await _videoPlayerController.initialize();
+    await _videoPlayerController.setLooping(true);
     _videoPlayerController.addListener(() {
       if (_videoPlayerController.value.position ==
           _videoPlayerController.value.duration) {
