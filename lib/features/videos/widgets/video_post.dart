@@ -69,7 +69,8 @@ class _VideoPostState extends State<VideoPost>
     final isInitialized = _videoPlayerController.value.isInitialized;
     final isFullyVisible = info.visibleFraction == 1;
     final isPlaying = _videoPlayerController.value.isPlaying;
-    if (isInitialized && isFullyVisible && !isPlaying) {
+
+    if (isInitialized && isFullyVisible && !isPlaying && !_isPaused) {
       await _videoPlayerController.play();
     }
   }
