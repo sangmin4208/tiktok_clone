@@ -35,7 +35,7 @@ class _VideoPostState extends State<VideoPost>
       duration: _animationDuration,
       lowerBound: 1.0,
       upperBound: 1.5,
-      value: 1.5,
+      value: 1,
     );
   }
 
@@ -67,12 +67,24 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onVisibilityChanged(VisibilityInfo info) async {
+    if (!mounted) {
+      return;
+    }
     final isInitialized = _videoPlayerController.value.isInitialized;
+    if (!isInitialized) {
+      return;
+    }
     final isFullyVisible = info.visibleFraction == 1;
     final isPlaying = _videoPlayerController.value.isPlaying;
+    final isZeroVisible = info.visibleFraction == 0;
 
-    if (isInitialized && isFullyVisible && !isPlaying && !_isPaused) {
-      await _videoPlayerController.play();
+    if (isFullyVisible && !isPlaying && !_isPaused) {
+      _onTogglePlay();
+      return;
+    }
+    if (isPlaying && isZeroVisible) {
+      _onTogglePlay();
+      return;
     }
   }
 
@@ -93,6 +105,9 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _onCommentsTap() async {
+    if (!_videoPlayerController.value.isInitialized) {
+      return;
+    }
     final isPlaying = _videoPlayerController.value.isPlaying;
     if (isPlaying) {
       _onTogglePlay();
@@ -101,6 +116,7 @@ class _VideoPostState extends State<VideoPost>
     await showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder: (context) {
         return const VideoComments();
       },
@@ -142,7 +158,7 @@ class _VideoPostState extends State<VideoPost>
                     );
                   },
                   child: AnimatedOpacity(
-                    opacity: _isPaused ? 1 : 0,
+                    opacity: _isPaused ? 0 : 1,
                     duration: _animationDuration,
                     child: const FaIcon(
                       FontAwesomeIcons.play,
