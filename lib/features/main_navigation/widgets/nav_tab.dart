@@ -9,6 +9,7 @@ class NavTab extends StatelessWidget {
     required this.isSelected,
     required this.onTab,
     IconData? selectedIcon,
+    required this.selectedIndex,
   }) : selectedIcon = selectedIcon ?? icon;
 
   final IconData icon;
@@ -16,6 +17,7 @@ class NavTab extends StatelessWidget {
   final bool isSelected;
   final IconData selectedIcon;
   final VoidCallback onTab;
+  final int selectedIndex;
 
   IconData get _icon => isSelected ? selectedIcon : icon;
   double get _opacity => isSelected ? 1 : 0.6;
@@ -36,15 +38,15 @@ class NavTab extends StatelessWidget {
               children: [
                 FaIcon(
                   _icon,
-                  color: Colors.white,
+                  color: selectedIndex == 0 ? Colors.white : Colors.black,
                 ),
                 const SizedBox(
                   height: 6,
                 ),
                 Text(
                   label,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: selectedIndex == 0 ? Colors.white : Colors.black,
                   ),
                 ),
               ],
